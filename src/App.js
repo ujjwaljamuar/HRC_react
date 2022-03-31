@@ -3,13 +3,15 @@ import './App.css';
 import First from './components/First';
 import Second from './components/Second';
 import ClassComponent from './components/ClassComponent';
-
-
-function App() {
+import ClassStateComp from './components/ClassStateComp';
+import FunctionStateComp from './components/FunnctionStateComp';
+import Register from './components/Register';
+import MyGrid from './components/MyGrid'
+/*function App() {
   let students = [
     {
       name: "Ujjwal Jamuar",
-      age: 26
+      age: 21
     }, {
       name: "Shakshi",
       age: 20
@@ -17,11 +19,20 @@ function App() {
       name: "Prateek",
       age: 21
     }, {
-      name: "Mishra",
+      name: "Chandan",
+      age: 21
+    }, {
+      name: "Anas",
+      age: 21
+    }, {
+      name: "Somesh",
       age: 21
     }
   ]
   return <>
+    <ClassStateComp/>
+    <hr/>
+    <FunctionStateComp/>
     <ClassComponent/>
     <hr></hr>
     {students.map(students =>
@@ -31,6 +42,14 @@ function App() {
         <hr></hr>
       </>)}
   </>
+}*/
+function App(){
+  return (
+    <>
+      <MyGrid/>
+    </>
+  );
 }
+
 
 export default App;
