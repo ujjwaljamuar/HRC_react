@@ -10,15 +10,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import AddActor from "./AddActor";
+import EditActor from "./EditActor";
+import { Button, Checkbox } from "@mui/material";
 
 
 
 function MyGrid() {
     const [data, setData] = useState([]);
 
-    const [actor, setActor] = useState({ first_name: '', last_name: '' });
+    const [actor, setActor] = useState({ id: '', first_name: '', last_name: '' });
 
-    const { first_name, last_name } = actor;
+    const { first_name, last_name, id } = actor;
+    const [open, setOpen] = useState(false);
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
@@ -33,11 +36,27 @@ function MyGrid() {
         }
     }
 
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const editHandler = () => {
+        setOpen(true);
+    }
+
+    const checkHandler = (e, id) => {
+        if(e.target.checked){
+            let editActor = data.filter(actor => actor.id == id)[0];
+            setActor(editActor);
+        }
+    }
+
     useEffect(async function () {
         setData(await getData())
     }, []);
 
     return <>
+        <EditActor id={id} first_name={first_name} last_name={last_name} open={open} handleClose={handleClose} changeHandler={changeHandler} />
         <AddActor
             first_name={first_name}
             last_name={last_name}
@@ -46,20 +65,28 @@ function MyGrid() {
         />
         <br /><hr />
 
+        <Button variant="contained" onClick={editHandler} >Edit</Button>
+        <Button variant="outlined">Outlined</Button>
+
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
 
-                        <TableCell align="right">Actor's Id</TableCell>
-                        <TableCell align="right">Actor's First_Name</TableCell>
-                        <TableCell align="right">Actor's Last_Name</TableCell>
+                        <TableCell align="left">Select</TableCell>
+                        <TableCell align="left">Actor's Id</TableCell>
+                        <TableCell align="left">Actor's First_Name</TableCell>
+                        <TableCell align="left">Actor's Last_Name</TableCell>
 
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {data.map((actor => (
                         <TableRow key={actor.id}>
+
+                            <TableCell component="th" scope="actor">
+                                <Checkbox onClick={(e) => checkHandler(e, actor.id)} />
+                            </TableCell>
 
                             <TableCell component="th" scope="actor">{actor.id}</TableCell>
                             <TableCell component="th" scope="actor">{actor.first_name}</TableCell>
