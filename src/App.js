@@ -1,12 +1,4 @@
-import './App.css';
-
-import First from './components/First';
-import Second from './components/Second';
-import ClassComponent from './components/ClassComponent';
-import ClassStateComp from './components/ClassStateComp';
-import FunctionStateComp from './components/FunnctionStateComp';
-import Register from './components/Register';
-import MyGrid from './components/MyGrid'
+import MyGrid from './components/MyGrid';
 /*function App() {
   let students = [
     {
