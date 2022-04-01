@@ -7,7 +7,7 @@ function AddActor({ first_name, last_name, changeHandler, submitHandler }) {
             <label>Last Name : </label>
             <input name="last_name" value={last_name} onChange={changeHandler} />
             <br />
-            <input type="submit" value={"Add Actor"} onclick={submitHandler} />
+            <input type={"submit"} value={"Add Actor"} onClick={submitHandler} />
         </form>
     </>
 }

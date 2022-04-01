@@ -26,7 +26,7 @@ function MyGrid() {
     }
 
     const submitHandler = async (e) => {
-        e.stopPropagation();
+        e.preventDefault();
         let response = await addActor(actor);
         if (response) {
             setActor({ first_name: '', last_name: '' });
@@ -51,9 +51,9 @@ function MyGrid() {
                 <TableHead>
                     <TableRow>
 
-                        <TableCell align="">Actor's Id</TableCell>
-                        <TableCell align="">Actor's First_Name</TableCell>
-                        <TableCell align="">Actor's Last_Name</TableCell>
+                        <TableCell align="right">Actor's Id</TableCell>
+                        <TableCell align="right">Actor's First_Name</TableCell>
+                        <TableCell align="right">Actor's Last_Name</TableCell>
 
                     </TableRow>
                 </TableHead>
