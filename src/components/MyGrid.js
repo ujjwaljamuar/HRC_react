@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { addActor, getData } from '../services/data';
+import { getData, addActor, updateActor, deleteActor } from '../services/data';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -36,16 +36,23 @@ function MyGrid() {
         }
     }
 
-    const handleClose = () => {
+    const handleClose = async (update) => {
+        if (update) {
+            let response = await updateActor(actor);
+        }
         setOpen(false);
+
     };
 
     const editHandler = () => {
         setOpen(true);
     }
+    const deleteHandler = async () => {
+        let response = await deleteActor(actor.id);
+    }
 
     const checkHandler = (e, id) => {
-        if(e.target.checked){
+        if (e.target.checked) {
             let editActor = data.filter(actor => actor.id == id)[0];
             setActor(editActor);
         }
@@ -66,7 +73,7 @@ function MyGrid() {
         <br /><hr />
 
         <Button variant="contained" onClick={editHandler} >Edit</Button>
-        <Button variant="outlined">Outlined</Button>
+        <Button variant="outlined" onClick={deleteHandler}>Delete</Button>
 
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">

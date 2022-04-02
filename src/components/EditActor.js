@@ -8,16 +8,17 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
-export default function EditActor({ open,id,first_name, last_name, changeHandler, submitHandler,handleClose}) {
-    
+export default function EditActor({ open, id, first_name, last_name, changeHandler, submitHandler, handleClose }) {
+
 
     return (
         <div>
-            
+
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Edit Actor</DialogTitle>
                 <DialogContent>
                     <TextField
+                        name='id'
                         autoFocus
                         margin="dense"
                         label="Actor ID"
@@ -29,6 +30,7 @@ export default function EditActor({ open,id,first_name, last_name, changeHandler
                         variant="standard"
                     />
                     <TextField
+                        name='first_name'
                         autoFocus
                         margin="dense"
                         id="first_name"
@@ -41,6 +43,7 @@ export default function EditActor({ open,id,first_name, last_name, changeHandler
                     />
                     <TextField
                         autoFocus
+                        name='last_name'
                         margin="dense"
                         id="last_name"
                         label="Last Name"
@@ -52,8 +55,8 @@ export default function EditActor({ open,id,first_name, last_name, changeHandler
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Update</Button>
+                    <Button onClick={() => handleClose(false)}>Cancel</Button>
+                    <Button onClick={() => handleClose(true)}>Update</Button>
                 </DialogActions>
             </Dialog>
         </div>
