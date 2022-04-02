@@ -16,6 +16,7 @@ import { Button, Checkbox } from "@mui/material";
 
 
 function MyGrid() {
+
     const [data, setData] = useState([]);
 
     const [actor, setActor] = useState({ id: '', first_name: '', last_name: '' });
@@ -64,6 +65,7 @@ function MyGrid() {
 
     return <>
         <EditActor id={id} first_name={first_name} last_name={last_name} open={open} handleClose={handleClose} changeHandler={changeHandler} />
+        
         <AddActor
             first_name={first_name}
             last_name={last_name}
@@ -74,7 +76,7 @@ function MyGrid() {
 
         <Button variant="contained" onClick={editHandler} >Edit</Button>
         <Button variant="outlined" onClick={deleteHandler}>Delete</Button>
-
+        <br />
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
