@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getData, addActor, updateActor, deleteActor } from '../services/data';
+import * as React from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,7 +14,7 @@ import AddActor from "./AddActor";
 import EditActor from "./EditActor";
 import { Button, Checkbox } from "@mui/material";
 
-
+import Pagination from "./Pagination";
 
 function MyGrid() {
 
@@ -23,6 +24,19 @@ function MyGrid() {
 
     const { first_name, last_name, id } = actor;
     const [open, setOpen] = useState(false);
+
+    const [count, setCount] = useState(0);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
@@ -35,6 +49,8 @@ function MyGrid() {
         if (response) {
             setActor({ first_name: '', last_name: '' });
         }
+        setData([...data, actor]);
+
     }
 
     const handleClose = async (update) => {
@@ -60,12 +76,14 @@ function MyGrid() {
     }
 
     useEffect(async function () {
-        setData(await getData())
-    }, []);
+        let data = await getData(page, rowsPerPage);
+        setData(data['data']);
+        setCount(data['count']);
+    }, [rowsPerPage, page]);
 
     return <>
         <EditActor id={id} first_name={first_name} last_name={last_name} open={open} handleClose={handleClose} changeHandler={changeHandler} />
-        
+
         <AddActor
             first_name={first_name}
             last_name={last_name}
@@ -106,6 +124,13 @@ function MyGrid() {
                 </TableBody>
             </Table>
         </TableContainer>
+        <Pagination
+            count={count}
+            page={page}
+            rowsPerPage = {rowsPerPage}
+            handleChangePage = {handleChangePage}
+            handleChangeRowsPerPage = {handleChangeRowsPerPage}
+        />
     </>
 }
 

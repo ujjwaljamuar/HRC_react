@@ -1,10 +1,12 @@
 import axios from "axios";
 
-export const getData = async () => {
-    let response = await axios.get("http://localhost:8080/Backend/DataLoading");
+export const getData = async (start, limit) => {
+    let str = "start=" + (start * limit) + "&limit=" + limit;
+    let response = await axios.get("http://localhost:8080/Backend/DataLoading?" + str);
     let data = response.data.actors;
+    let count = response.data.count;
     data.map((actor, index) => ({ ...actor, "id": index }))
-    return data;
+    return { data, count };
 }
 
 export const addActor = async ({ first_name, last_name }) => {
